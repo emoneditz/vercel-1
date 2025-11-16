@@ -9,15 +9,18 @@
     <!-- Emoji Picker Library -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <style>
+        /* Styles from your original maroon theme have been applied here */
         :root {
-            --bg-primary: #000000;
-            --bg-secondary: #1a1a1a;
-            --bubble-me: #2d2d2d;
-            --bubble-emon: #333333;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --border-color: #404040;
-            --input-bg: #2d2d2d;
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #2C1A1A;
+            --bubble-me: #333333;
+            --bubble-emon: #5C0000; /* Changed from --bubble-rumaisa */
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --border-color: #4B0000;
+            --input-bg: #1A1A1A;
+            --accent-maroon: #990000;
+            --hover-maroon: #BF0A30;
         }
 
         * {
@@ -32,23 +35,24 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
         }
 
+        /* Restored gradient background */
         body {
             height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: var(--bg-primary);
+            background: linear-gradient(to top right, #ffffff, #ffe4e9);
             color: var(--text-primary);
         }
 
-        /* Main container */
+        /* Restored transparent container to show gradient */
         .chat-container {
             width: 100vw;
             height: 100%;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: var(--bg-primary);
+            background: transparent;
         }
 
         /* Chat Header */
@@ -66,6 +70,7 @@
             justify-content: center;
         }
         
+        /* Kept the new signal light functionality */
         #signal-light {
             width: 12px;
             height: 12px;
@@ -87,7 +92,7 @@
             align-items: center;
         }
         .profile-link:hover {
-            color: var(--text-primary);
+            color: var(--hover-maroon);
         }
 
         /* Chat messages area */
@@ -97,7 +102,7 @@
             padding-bottom: calc(1rem + 6rem + env(safe-area-inset-bottom, 0));
             overflow-y: auto;
             scroll-behavior: smooth;
-            background: var(--bg-primary);
+            background: transparent;
         }
 
         /* Simple message bubbles */
@@ -121,6 +126,7 @@
             color: var(--text-primary); 
             margin-left: auto; 
             border-bottom-right-radius: 0.5rem;
+            border: 1px solid #444;
         }
 
         .emon { 
@@ -128,16 +134,19 @@
             color: var(--text-primary); 
             margin-right: auto; 
             border-bottom-left-radius: 0.5rem;
+            border: 1px solid var(--border-color);
         }
 
         .message:hover {
-            background-color: var(--bg-secondary);
+            border-color: var(--hover-maroon);
         }
 
+        /* Restored blue glowing time style */
         .message-time { 
             font-size: 0.7rem; 
-            color: var(--text-secondary);
-            opacity: 0.8; 
+            color: #3399FF;
+            text-shadow: 0 0 8px #3399FF;
+            opacity: 1;
             margin-top: 0.5rem; 
             float: right; 
             margin-left: 1rem;
@@ -209,11 +218,13 @@
             border-radius: 2rem; 
             border: 1px solid var(--border-color);
             min-height: 3rem; 
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         
+        /* Restored maroon focus glow */
         .message-input-wrapper:focus-within {
-            border-color: #007AFF;
+            border-color: var(--accent-maroon);
+            box-shadow: 0 0 8px var(--accent-maroon);
         }
 
         .message-input { 
@@ -250,9 +261,11 @@
             font-size: 1.5rem; 
         }
 
+        /* Restored maroon send button */
         .send-button { 
-            background: #007AFF; 
+            background: var(--accent-maroon); 
             color: white;
+            border-color: var(--hover-maroon);
         }
         
         .plus-button, .emoji-button { 
@@ -260,21 +273,28 @@
             color: var(--text-primary); 
         }
 
-        .send-button:hover:not(:disabled), .plus-button:hover, .emoji-button:hover { 
-            opacity: 0.8;
+        .send-button:hover:not(:disabled) { 
+            background: var(--hover-maroon);
+            box-shadow: 0 0 8px var(--hover-maroon);
+        }
+        
+        .plus-button:hover, .emoji-button:hover {
+            border-color: var(--accent-maroon);
+            color: var(--accent-maroon);
         }
 
         .send-button:disabled { 
             background: var(--bg-secondary); 
             color: var(--text-secondary); 
             cursor: not-allowed; 
+            border-color: var(--border-color);
         }
         
         .file-info-bar {
             display: none; 
             width: 100%; 
             padding: 0.75rem 1rem;
-            background: var(--input-bg);
+            background: var(--bg-secondary);
             border-radius: 1rem; 
             align-items: center; 
             justify-content: space-between;
@@ -302,6 +322,7 @@
             gap: 0.75rem;
             transition: all 0.6s ease; 
             opacity: 0;
+            box-shadow: 0 4px 15px rgba(153, 0, 0, 0.4);
         }
 
         #sentNotification.show { 
@@ -323,6 +344,8 @@
 
         .load-more:hover { 
             background: var(--bg-secondary);
+            border-color: var(--accent-maroon);
+            color: var(--accent-maroon);
         }
 
         .modal-container { 
@@ -334,7 +357,7 @@
             width: 100%; 
             height: 100%; 
             overflow: auto; 
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(10, 0, 0, 0.95);
             justify-content: center; 
             align-items: center;
         }
@@ -365,7 +388,7 @@
         }
 
         .close-modal-btn:hover { 
-            background: #ef4444; 
+            background: var(--hover-maroon); 
         }
 
         .date-separator span {
@@ -379,7 +402,7 @@
         }
 
         .chat-box::-webkit-scrollbar { 
-            width: 4px; 
+            width: 6px; 
         }
         
         .chat-box::-webkit-scrollbar-track { 
@@ -388,18 +411,18 @@
         
         .chat-box::-webkit-scrollbar-thumb { 
             background: var(--border-color); 
-            border-radius: 2px; 
+            border-radius: 3px; 
         }
         
         .chat-box::-webkit-scrollbar-thumb:hover { 
-            background: var(--text-secondary); 
+            background: var(--accent-maroon); 
         }
 
         .file-message { 
             display: flex; 
             align-items: center; 
             padding: 1rem; 
-            background: var(--input-bg);
+            background: var(--bg-secondary);
             border-radius: 1rem; 
             margin: 0.5rem 0; 
             cursor: pointer; 
@@ -408,29 +431,30 @@
         }
         
         .file-message:hover { 
-            background: var(--bg-secondary);
+            border-color: var(--accent-maroon);
         }
         
         .file-icon { 
             font-size: 1.5rem; 
             margin-right: 0.75rem; 
-            color: var(--text-primary); 
+            color: var(--accent-maroon); 
         }
         
         .reply-preview { 
             padding: 0.5rem 0.75rem; 
-            margin-bottom: 0.5rem; 
+            margin: -0.25rem 0 0.5rem; 
             border-radius: 0.75rem; 
-            background: rgba(255,255,255,0.1); 
+            background: rgba(0,0,0,0.2); 
             display: flex; 
             gap: 0.5rem; 
             border: 1px solid var(--border-color);
         }
         
+        /* Restored maroon reply bar */
         .reply-bar { 
-            width: 2px; 
-            background-color: #007AFF; 
-            border-radius: 1px; 
+            width: 3px; 
+            background-color: var(--accent-maroon); 
+            border-radius: 1.5px; 
             flex-shrink: 0; 
         }
         
@@ -446,7 +470,7 @@
         
         .reply-sender { 
             font-weight: 600; 
-            color: #007AFF; 
+            color: var(--hover-maroon); 
         }
         
         .message.emon .reply-sender { 
@@ -504,7 +528,7 @@
             width: 100%; 
             text-align: left; 
             color: var(--text-primary);
-            transition: background-color 0.2s ease; 
+            transition: background-color 0.2s ease, color 0.2s ease; 
             font-size: 0.875rem; 
             font-weight: 500;
             cursor: pointer;
@@ -512,8 +536,13 @@
             background: transparent;
         }
         
+        /* Restored context menu hover style */
         .context-action-btn:hover { 
-            background-color: var(--bg-secondary); 
+            background-color: var(--accent-maroon); 
+            color: white;
+        }
+        .context-action-btn:hover i {
+            color: white !important;
         }
 
         #emojiPickerContainer { 
@@ -521,10 +550,11 @@
             z-index: 102; 
         }
         
+        /* Restored maroon outline for emoji picker */
         emoji-picker {
             --background: var(--input-bg);
             --border-color: var(--border-color);
-            --outline-color: #007AFF;
+            --outline-color: var(--accent-maroon);
             --text-color: var(--text-primary);
             --secondary-text-color: var(--text-secondary);
             --border-radius: 1rem;
@@ -552,7 +582,7 @@
     <div class="chat-header">
         <div class="flex items-center justify-center gap-3 mb-1">
             <h3 class="font-bold text-xl tracking-wide">Emon</h3>
-            <span id="signal-light"></span>
+            <span id="signal-light"></span> <!-- Kept new element -->
         </div>
         <a href="https://emoneditz.github.io/about-me/" target="_blank" class="profile-link">
             <i class="fas fa-user-circle mr-1"></i> View Profile
@@ -641,6 +671,7 @@
 </div>
 
 
+<!-- SCRIPT IS UNCHANGED TO PRESERVE VERCEL BACKEND FUNCTIONALITY -->
 <script>
     // NOTE: All Telegram API logic has been moved to the Node.js backend.
     // This script now communicates with `/api/...` endpoints.
